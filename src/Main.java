@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         EventQueue.invokeLater(new Runnable() {
             private static void utworzInterface() {
 
@@ -16,7 +17,7 @@ public class Main {
                 ramkaPaneli.setAlwaysOnTop(true);
 
                 JPanelWprowadzanie panelWprowadzanie = new JPanelWprowadzanie(); // tworzę panel do wprowadzania danych
-                JPanelGra panelGra = new JPanelGra(); // tworzę panel do wprowadzania liczb i wyswietlania komunikatów podczas gry.
+                JPanelGra panelGra = new JPanelGra(panelWprowadzanie); // tworzę panel do wprowadzania liczb i wyswietlania komunikatów podczas gry.
 
                 JPanel panelGlowny = new JPanel(); // tworzę panel główny do umieszczania w nim innych paneli
                 panelGlowny.setLayout(new BorderLayout());

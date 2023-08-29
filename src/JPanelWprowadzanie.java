@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class JPanelWprowadzanie extends JPanel {
+    // private  JPanelGra panelGra;                          // referencja do klasy aby była widoczna w tej klasie
 
     private final JTextField poleZakres;
     private final JTextField poleLiczbaProb;
@@ -9,10 +10,8 @@ public class JPanelWprowadzanie extends JPanel {
     public int zakres;
     public int liczbaProb;
 
-    //private  JPanelGra panelGra;                          // referencja do klasy aby była widoczna w tej klasie
+    public JPanelWprowadzanie() {
 
-    public JPanelWprowadzanie() {        //jw. (JPanelGra panelGra)
-        //this.panelGra = panelGra;                          //jw.
 
         poleZakres = new JTextField("podaj koniec zakresu", 12);
         poleLiczbaProb = new JTextField("podaj ilość prób", 12);
@@ -56,16 +55,17 @@ public class JPanelWprowadzanie extends JPanel {
     }
 
 
+
     public void wykonajAkcjeZatwierdz() {
         String zakresWpisany = poleZakres.getText();
         String liczbaProbWpisana = poleLiczbaProb.getText();
         try {
             zakres = Integer.parseInt(zakresWpisany);
             liczbaProb = Integer.parseInt(liczbaProbWpisana);
+            System.out.println(zakres);
+            System.out.println(liczbaProb);
         } catch (NumberFormatException f) {
             System.out.println("Błąd! Podaj liczbę");
         }
-        System.out.println(zakres);
-        System.out.println(liczbaProb);
     }
 }

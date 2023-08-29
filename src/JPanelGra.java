@@ -1,15 +1,18 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class JPanelGra extends JPanel {
+    private JPanelWprowadzanie panelWprowadzanie;
 
-    int liczba;
+    int zmienna;
     private final JTextArea poleKomunikat;
     private final JTextField poleZgadywanaLiczba;
     private final JButton zatwierdzLiczbe;
 
 
-    public JPanelGra() {
+    public JPanelGra(JPanelWprowadzanie panelWprowadzanie) {
+        this.panelWprowadzanie = panelWprowadzanie;
 
 
         poleZgadywanaLiczba = new JTextField("Wpisz liczbę do odgadnięcia");
@@ -50,13 +53,23 @@ public class JPanelGra extends JPanel {
 
     public void wykonajAkcjeZatwierdzGra() {
         String wprowadzanaLiczba = poleZgadywanaLiczba.getText();
-        try {
-            liczba = Integer.parseInt(wprowadzanaLiczba);
-            System.out.println("Podałes liczbę " + liczba + " ta liczba jest za...");
-            poleKomunikat.setText("Podałes liczbę " + liczba + " ta liczba jest za...");
+        Random random = new Random();
+        int liczba = random.nextInt(panelWprowadzanie.zakres);
+        for (int i = 0; i < panelWprowadzanie.liczbaProb; i++) {
 
-        } catch (NumberFormatException f) {
-            poleKomunikat.setText("Błąd! Podaj liczbę");
+            try {
+                if (i==0)
+                {
+                    poleKomunikat.setText("Podaj pierwszą liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
+                } else
+                {
+                    poleKomunikat.setText("Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
+                }
+            } catch (NumberFormatException f) {
+                poleKomunikat.setText("Błąd! Podaj liczbę");
+            }
+            zmienna = Integer.parseInt(wprowadzanaLiczba);
+
         }
     }
 }
