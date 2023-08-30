@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.Random;
 
-public class JPanelGra extends JPanel {
+public class JPanelGra extends JPanel implements KomunikatListener {
     private JPanelWprowadzanie panelWprowadzanie;
 
     int zmienna;
@@ -52,24 +52,32 @@ public class JPanelGra extends JPanel {
     }
 
     public void wykonajAkcjeZatwierdzGra() {
+
+
         String wprowadzanaLiczba = poleZgadywanaLiczba.getText();
-        Random random = new Random();
-        int liczba = random.nextInt(panelWprowadzanie.zakres);
+        zmienna = Integer.parseInt(wprowadzanaLiczba);
+
         for (int i = 0; i < panelWprowadzanie.liczbaProb; i++) {
 
             try {
-                if (i==0)
-                {
-                    poleKomunikat.setText("Podaj pierwszą liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                } else
-                {
-                    poleKomunikat.setText("Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
+                if (i == 0) {
+                    poleKomunikat.setText(" Podaj pierwszą liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
+                } else {
+                    poleKomunikat.setText(" Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
                 }
             } catch (NumberFormatException f) {
                 poleKomunikat.setText("Błąd! Podaj liczbę");
             }
-            zmienna = Integer.parseInt(wprowadzanaLiczba);
+
+            if (panelWprowadzanie.liczba == zmienna) {
+                poleKomunikat.setText(" Brawo!\n Liczba podana przez Ciebie: " + zmienna + " jest taka sama\n  jak wylosowana przeze mnie liczba: " + panelWprowadzanie.liczba);
+            }
 
         }
     }
-}
+
+        @Override
+        public void onKomunikat(String komunikat) {
+            poleKomunikat.setText(komunikat);
+        }
+    }

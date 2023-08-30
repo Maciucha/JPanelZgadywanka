@@ -1,14 +1,16 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class JPanelWprowadzanie extends JPanel {
-    // private  JPanelGra panelGra;                          // referencja do klasy aby była widoczna w tej klasie
-
+    private KomunikatListener komunikatListener;
     private final JTextField poleZakres;
     private final JTextField poleLiczbaProb;
     private final JButton zatwierdz;
     public int zakres;
     public int liczbaProb;
+
+    public int liczba;
 
     public JPanelWprowadzanie() {
 
@@ -62,10 +64,19 @@ public class JPanelWprowadzanie extends JPanel {
         try {
             zakres = Integer.parseInt(zakresWpisany);
             liczbaProb = Integer.parseInt(liczbaProbWpisana);
-            System.out.println(zakres);
-            System.out.println(liczbaProb);
+
+            Random random = new Random();
+            liczba = random.nextInt(zakres);
+
+            komunikatListener.onKomunikat(" Podaj pierwszą liczbę z zakresu 0-" + zakres + " który wybrałeś \n Masz na to jeszcze " + liczbaProb + " prób.");
+            System.out.println(liczba);
+            System.out.println("Zakres ustawiony na 0-" + zakres);
+            System.out.println("Liczba prób ustawiona na " + liczbaProb);
         } catch (NumberFormatException f) {
             System.out.println("Błąd! Podaj liczbę");
         }
+    }
+    public void setKomunikatListener(KomunikatListener listener) {
+        this.komunikatListener = listener;
     }
 }

@@ -13,11 +13,12 @@ public class Main {
 
                 JFrame ramkaPaneli = new JFrame("Wprowadź parametry gry.");
                 ramkaPaneli.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                ramkaPaneli.setBounds(800, 400, 800, 600);
+                ramkaPaneli.setBounds(800, 400, 900, 600);
                 ramkaPaneli.setAlwaysOnTop(true);
 
                 JPanelWprowadzanie panelWprowadzanie = new JPanelWprowadzanie(); // tworzę panel do wprowadzania danych
                 JPanelGra panelGra = new JPanelGra(panelWprowadzanie); // tworzę panel do wprowadzania liczb i wyswietlania komunikatów podczas gry.
+                panelWprowadzanie.setKomunikatListener(panelGra);
 
                 JPanel panelGlowny = new JPanel(); // tworzę panel główny do umieszczania w nim innych paneli
                 panelGlowny.setLayout(new BorderLayout());
@@ -58,3 +59,6 @@ public class Main {
         });
     }
 }
+
+
+
