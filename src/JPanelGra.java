@@ -5,8 +5,8 @@ public class JPanelGra extends JPanel implements KomunikatListener {
     private final JTextArea poleKomunikat;
     private final JTextField poleZgadywanaLiczba;
     private final JButton zatwierdzLiczbe;
-    int zmienna;
     private final JPanelWprowadzanie panelWprowadzanie;
+    int zmienna;
 
 
     public JPanelGra(JPanelWprowadzanie panelWprowadzanie) {
@@ -52,22 +52,21 @@ public class JPanelGra extends JPanel implements KomunikatListener {
     public void wykonajAkcjeZatwierdzGra() {
 
 
-
-
         for (int i = 0; i < panelWprowadzanie.liczbaProb; i++) {
-
-            String wprowadzanaLiczba = poleZgadywanaLiczba.getText();
-            zmienna = Integer.parseInt(wprowadzanaLiczba);
 
             try {
                 if (i == 0) {
                     poleKomunikat.setText(" Podaj pierwszą liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                    System.out.println("zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + panelWprowadzanie.liczbaProb);
+                    System.out.println("zmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + panelWprowadzanie.liczbaProb);
                     break;
                 } else {
                     poleKomunikat.setText(" Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                    System.out.println("zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + panelWprowadzanie.liczbaProb);
+                    System.out.println("zmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + panelWprowadzanie.liczbaProb);
                 }
+
+                String wprowadzanaLiczba = poleZgadywanaLiczba.getText();
+                zmienna = Integer.parseInt(wprowadzanaLiczba);
+
                 if (panelWprowadzanie.liczba == zmienna) {
                     poleKomunikat.setText(" Brawo!\n Liczba podana przez Ciebie: " + zmienna + " jest taka sama\n  jak wylosowana przeze mnie liczba: " + panelWprowadzanie.liczba);
                 } else if (panelWprowadzanie.liczba > zmienna) {
