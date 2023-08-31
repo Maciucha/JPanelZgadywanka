@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class JPanelGra extends JPanel implements KomunikatListener {
-    private final JTextArea poleKomunikat;
-    private final JTextField poleZgadywanaLiczba;
-    private final JButton zatwierdzLiczbe;
-    private final JPanelWprowadzanie panelWprowadzanie;
+    private  JTextArea poleKomunikat;
+    private  JTextField poleZgadywanaLiczba;
+    private  JPanelWprowadzanie panelWprowadzanie;
     int zmienna;
+
+    String wprowadzanaLiczba;
 
 
     public JPanelGra(JPanelWprowadzanie panelWprowadzanie) {
@@ -16,7 +17,7 @@ public class JPanelGra extends JPanel implements KomunikatListener {
         poleZgadywanaLiczba = new JTextField("Wpisz liczbę do odgadnięcia");
         poleKomunikat = new JTextArea(10, 20);
         poleKomunikat.setEditable(false);
-        zatwierdzLiczbe = new JButton("Zatwierdż liczbę");
+        JButton zatwierdzLiczbe = new JButton("Zatwierdż liczbę");
 
         add(poleKomunikat);
 
@@ -38,12 +39,7 @@ public class JPanelGra extends JPanel implements KomunikatListener {
             }
         });
 
-        ActionListener zatwierdzGraListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                wykonajAkcjeZatwierdzGra();
-            }
-        };
+        ActionListener zatwierdzGraListener = e -> wykonajAkcjeZatwierdzGra();
 
         poleZgadywanaLiczba.addActionListener(zatwierdzGraListener);
         zatwierdzLiczbe.addActionListener(zatwierdzGraListener);
@@ -57,18 +53,18 @@ public class JPanelGra extends JPanel implements KomunikatListener {
             try {
                 if (i == 0) {
                     poleKomunikat.setText(" Podaj pierwszą liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                    System.out.println("zmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + panelWprowadzanie.liczbaProb);
-                    break;
+                    System.out.println("i: "+i+"\nzmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + (panelWprowadzanie.liczbaProb-i));
                 } else {
                     poleKomunikat.setText(" Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                    System.out.println("zmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + panelWprowadzanie.liczbaProb);
+                    System.out.println("i: "+i+"\nzmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + (panelWprowadzanie.liczbaProb-i));
                 }
 
-                String wprowadzanaLiczba = poleZgadywanaLiczba.getText();
+                wprowadzanaLiczba = poleZgadywanaLiczba.getText();
                 zmienna = Integer.parseInt(wprowadzanaLiczba);
 
                 if (panelWprowadzanie.liczba == zmienna) {
                     poleKomunikat.setText(" Brawo!\n Liczba podana przez Ciebie: " + zmienna + " jest taka sama\n  jak wylosowana przeze mnie liczba: " + panelWprowadzanie.liczba);
+                    break;
                 } else if (panelWprowadzanie.liczba > zmienna) {
                     poleKomunikat.setText("Twoja liczba " + zmienna + " ma za niską wartość");
                 } else {
@@ -76,6 +72,9 @@ public class JPanelGra extends JPanel implements KomunikatListener {
                 }
             } catch (NumberFormatException f) {
                 poleKomunikat.setText("Błąd! Podaj liczbę");
+            }
+            if (panelWprowadzanie.liczbaProb == 1){
+                System.exit(0);
             }
         }
     }
