@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class JPanelGra extends JPanel implements KomunikatListener {
     private  JTextArea poleKomunikat;
@@ -56,6 +59,10 @@ public class JPanelGra extends JPanel implements KomunikatListener {
 
                 if (panelWprowadzanie.liczba == zmienna) {
                     poleKomunikat.setText(" Brawo!\n Liczba podana przez Ciebie: " + zmienna + " jest taka sama\n  jak wylosowana przeze mnie liczba: " + panelWprowadzanie.liczba);
+                    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+                    executor.schedule(() -> {
+                        System.exit(0);
+                    }, 4000, TimeUnit.MILLISECONDS);
                 } else if (panelWprowadzanie.liczba > zmienna) {
                     poleKomunikat.setText("Twoja liczba " + zmienna + " ma za niską wartość\n Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
                 } else {
