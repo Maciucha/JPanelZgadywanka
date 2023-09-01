@@ -51,30 +51,19 @@ public class JPanelGra extends JPanel implements KomunikatListener {
         for (int i = 0; i < panelWprowadzanie.liczbaProb; i++) {
 
             try {
-                if (i == 0) {
-                    poleKomunikat.setText(" Podaj pierwszą liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                    System.out.println("i: "+i+"\nzmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + (panelWprowadzanie.liczbaProb-i));
-                } else {
-                    poleKomunikat.setText(" Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
-                    System.out.println("i: "+i+"\nzmienna: "+zmienna+"\nliczba: "+panelWprowadzanie.liczba+"\n zakres: " + panelWprowadzanie.zakres + "\n Liczba prób: " + (panelWprowadzanie.liczbaProb-i));
-                }
-
                 wprowadzanaLiczba = poleZgadywanaLiczba.getText();
                 zmienna = Integer.parseInt(wprowadzanaLiczba);
 
                 if (panelWprowadzanie.liczba == zmienna) {
                     poleKomunikat.setText(" Brawo!\n Liczba podana przez Ciebie: " + zmienna + " jest taka sama\n  jak wylosowana przeze mnie liczba: " + panelWprowadzanie.liczba);
-                    break;
                 } else if (panelWprowadzanie.liczba > zmienna) {
-                    poleKomunikat.setText("Twoja liczba " + zmienna + " ma za niską wartość");
+                    poleKomunikat.setText("Twoja liczba " + zmienna + " ma za niską wartość\n Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
                 } else {
-                    poleKomunikat.setText("Twoja liczba " + zmienna + " ma za wysoką wartość");
+                    poleKomunikat.setText("Twoja liczba " + zmienna + " ma za wysoką wartość\n Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
+                } if (panelWprowadzanie.liczbaProb == i){
                 }
             } catch (NumberFormatException f) {
                 poleKomunikat.setText("Błąd! Podaj liczbę");
-            }
-            if (panelWprowadzanie.liczbaProb == 1){
-                System.exit(0);
             }
         }
     }
