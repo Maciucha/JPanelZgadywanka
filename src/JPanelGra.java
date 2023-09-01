@@ -68,6 +68,11 @@ public class JPanelGra extends JPanel implements KomunikatListener {
                 } else {
                     poleKomunikat.setText("Twoja liczba " + zmienna + " ma za wysoką wartość\n Podaj kolejną liczbę z zakresu 0-" + panelWprowadzanie.zakres + " który wybrałeś \n Masz na to jeszcze " + (panelWprowadzanie.liczbaProb - i) + " prób.");
                 } if (panelWprowadzanie.liczbaProb == i){
+                    poleKomunikat.setText(" Przekroczyłeś maksymalną liczbę prób!");
+                    ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+                    executor.schedule(() -> {
+                        System.exit(0);
+                    }, 4000, TimeUnit.MILLISECONDS);
                 }
             } catch (NumberFormatException f) {
                 poleKomunikat.setText("Błąd! Podaj liczbę");
